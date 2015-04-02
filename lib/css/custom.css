@@ -1,0 +1,43 @@
+
+.switch-theme {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+}
+
+.switch-theme,
+.switch-theme a {
+  font-size: 16px !important;
+}
+
+.block {
+  position: absolute;
+}
+
+.flex {
+  display: flex; /* or inline-flex */
+}
+
+.flex.col {
+  flex-direction: row;
+}
+
+.flex.center {
+  align-items: center;
+}
+
+html.ijm-bg-img div.slide-background.present {
+  background-size: 100% 417px;
+/*  height: 417px;*/
+}
+
+iframe.react {
+  min-height: 300px;
+  width: 100%;
+  overflow: hidden;
+}
+
+div.inline-item {
+  flex-grow: 1;
+  padding: 10px;
+}
