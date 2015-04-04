@@ -11,7 +11,7 @@
         line-height: 1.42857143;
         color: #333;
       }
-
+      
       .rw-widget {
         max-width: 250px;
       }
@@ -34,20 +34,15 @@
   var widgets = ReactWidgets;
 
   var app = ce('div', null,
-    ce(widgets.DropdownList, {
-      data: ['Yolanda', 'Jane', 'John', 'Jose', 'Zane'],
-      defaultValue: 'Jane',
-      suggest: true
-    }),
     ce(widgets.SelectList, {
       data: ['Yolanda', 'Jane', 'John', 'Jose', 'Zane'],
-      defaultValue: 'Jane',
-      multiple: false
+      defaultValue: ['Jane', 'John'],
+      multiple: true
     }),
-    ce(widgets.Combobox, {
+    ce(widgets.Multiselect, {
       data: ['orange', 'red', 'blue', 'mauve', 'violet'],
       defaultOpen: true,
-      defaultValue: 'orange'
+      defaultValue: ['orange', 'blue']
     })
   )
 

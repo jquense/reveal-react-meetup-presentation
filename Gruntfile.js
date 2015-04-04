@@ -129,9 +129,9 @@ module.exports = function(grunt) {
 				files: [ 'css/reveal.scss' ],
 				tasks: 'css-core'
 			},
-            html: {
-                files: [ 'index.html']
-            }
+      html: {
+          files: [ 'index.html', 'slides/**.md']
+      }
 		}
 
 	});

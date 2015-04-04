@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
 		<link rel="stylesheet" href="lib/css/custom.css">
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -44,10 +44,164 @@
 				<section data-markdown="slides/intro.md" class='center'></section>
 
 
-				<section data-markdown="slides/about.md" data-separator="- - -" data-separator-vertical="vvv">
-					<h3>React-Widgets</h3>
+				<section data-markdown="slides/one.md" data-separator="- - -" data-separator-vertical="vvv">
+				</section>
+				<section>
+					<section>
+						<h3>React-Widgets</h3>
+						<p>
+							A suite of typed or data "bound" form input components for React. For all your form and CRUD needs
+						</p>
+						<p>
+							With a goal towards painless mapping of <b>Values</b>, <b>Arrays</b>, <b>Numbers</b> and 
+							<b>Dates</b> to user friendly inputs
+						</p>
+					</section>
+					<section>
+						<h2>Single Value Pickers</h2>
+						
+						<div class='row'>
+							<div class='col-6'>
 
-<!-- 					<iframe class='react' src="slides/examples/pickers.html"></iframe> -->
+<pre><code class='js'>
+  &lt;DropdownList 
+    data={list} 
+    defaultValue={this.state.value}/&gt;
+
+  &lt;SelectList 
+    data={list} 
+    defaultValue={this.state.value}/&gt;
+
+  &lt;Combobox 
+    data={list} 
+    defaultValue={this.state.value}/&gt;
+
+</code></pre>
+							</div>
+							<div class='col-6'>
+								<iframe class='example' style='height: 500px;' src="slides/examples/pickers.html"></iframe>
+							</div>
+						</div>
+					</section>
+					<section>
+						<h2>Multi value Value Pickers</h2>
+						
+						<div class='row'>
+							<div class='col-6'>
+
+<pre><code class='js'>
+  &lt;SelectList 
+    multiple
+    data={list} 
+    defaultValue={this.state.value}/&gt;
+
+  &lt;Multiselect 
+    data={list} 
+    defaultValue={this.state.value}/&gt;
+
+</code></pre>
+							</div>
+							<div class='col-6'>
+								<iframe class='example' src="slides/examples/multi-picker.html"></iframe>
+							</div>
+						</div>
+					</section>
+
+					<section>
+						<h2>Typed & Localized Inputs</h2>
+						
+						<div class='row'>
+							<div class='col-6'>
+
+<pre><code class='js'>
+  &lt;NumberPicker 
+    format='C0' 
+    defaultValue={this.state.value}/&gt;
+
+  &lt;DateTimePicker 
+    format='MMM dd, yyyy HH:ss tt'
+    defaultValue={this.state.value}/&gt;
+    
+</code></pre>
+							</div>
+							<div class='col-6'>
+								<iframe class='example' style='height: 500px;' src="slides/examples/locale-pickers.html"></iframe>
+							</div>
+						</div>
+					</section>
+				</section>
+
+				<section data-markdown="slides/two.md" data-separator="- - -" data-separator-vertical="vvv">
+				</section>
+
+				<section>
+					<section>
+						This strategy is flexible while also being maintainable
+						<div class='flex'>
+							<div class='inline-item'>
+								<img src='slides/img/dropdown-list.png'/>
+								<pre><code class='js' data-trim>
+  &lt;DropdownList 
+    data={listOfPeople} 
+    value={listOfPeople[0]}/&gt;
+							</code></pre>
+							</div>
+							<div class='inline-item'>
+								<img src='slides/img/dropdown-list-after.png'/>
+								<pre><code class='js' data-trim>
+  &lt;DropdownList 
+    data={listOfPeople} 
+    value={listOfPeople[0]}
+    itemComponent={GreenNameItem}
+    valueComponent={GreetingInput}
+    listComponent={GroupableList}/&gt;
+							</code></pre>
+							</div>
+						</div>
+					</section>
+					<section>
+					(we also try and provide short cuts for common things)
+								<pre><code class='js' data-trim>
+  &lt;DropdownList 
+    data={listOfPeople} 
+    value={listOfPeople[0]}
+    itemComponent={GreenNameItem}
+    valueComponent={GreetingInput}
+    listComponent={GroupableList}/&gt;
+							</code></pre>					
+						</section>
+				</section>
+
+				<section>
+					<h6>
+						Try to identify the minmal necessary state and where to locate it
+					</h6>
+
+					<div class='flex center'>
+						<div class='inline-item'>
+						<p>Try and identify how to split up a widget.</p>
+
+						<p>Which can usually be categorized in two main ways</p>
+						</div>
+						<div class='inline-item'>
+							<div class='flex col fragment' style='text-align:left;'>
+								<div class='inline-item'>
+									<h6>Reusable Sub-Components</h6>
+									<hr/>
+									<strong class='fragment'>List<br/></strong>
+									<strong class='fragment'>WidgetButton<br/></strong>
+									<strong class='fragment'>Popup<br/></strong>
+								</div>
+								<div class='inline-item'>
+									<h6>Repeatable Behavior</h6>
+									<hr/>
+									<strong class='fragment'>FilterListMixin<br/></strong>
+									<strong class='fragment'>RightToLeftMixin<br/></strong>
+									<strong class='fragment'>WidgetFocusMixin<br/></strong>
+								</div>
+							</div>
+						</div>
+					</div>
 				</section>
 			</div>
 		</div>
@@ -59,6 +213,10 @@
 		<script src="slides/widget-intro.js"></script>
 
 		<script>
+
+			Reveal.addEventListener( 'fragmentshown', function( event ) {
+			  console.log(event.fragment)
+			});
 
 			// Full list of configuration options available at:
 			// https://github.com/hakimel/reveal.js#configuration

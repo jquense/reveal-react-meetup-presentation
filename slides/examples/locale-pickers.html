@@ -12,12 +12,13 @@
         color: #333;
       }
 
-      .rw-widget {
+      .rw-widget:not(.rw-calendar) {
         max-width: 250px;
       }
       .rw-widget + .rw-widget {
         margin-top: 20px;
       }
+
     </style>
 </head>
 
@@ -34,20 +35,14 @@
   var widgets = ReactWidgets;
 
   var app = ce('div', null,
-    ce(widgets.DropdownList, {
-      data: ['Yolanda', 'Jane', 'John', 'Jose', 'Zane'],
-      defaultValue: 'Jane',
-      suggest: true
+    ce(widgets.NumberPicker, {
+      format: 'C0',
+      defaultValue: 13.04
     }),
-    ce(widgets.SelectList, {
-      data: ['Yolanda', 'Jane', 'John', 'Jose', 'Zane'],
-      defaultValue: 'Jane',
-      multiple: false
-    }),
-    ce(widgets.Combobox, {
-      data: ['orange', 'red', 'blue', 'mauve', 'violet'],
-      defaultOpen: true,
-      defaultValue: 'orange'
+    ce(widgets.DateTimePicker, {
+      format: 'MMM dd, yyyy HH:ss tt',
+      defaultValue: new Date(),
+      defaultOpen: 'calendar'
     })
   )
 
