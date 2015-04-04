@@ -26,37 +26,40 @@ Each widget handles **complex** values as well
 - - -
 
 I wanted to make inputs that worked great by themselves or could be easily 
-used as primatives for more complicated components.
+used as primitives for more complicated components.
 
 To that end they need to be __simple__ to use while also unopinionated and configurable so that they can be easily __composed__
 
 vvv
 
-Practically this means that Widgets:<!-- .element: style="text-align: left;" -->
+To meet that goal I try to make sure that Widgets:<!-- .element: style="text-align: left;" -->
 
-- Should manage the smallest possible amount of state
+- Manage the smallest possible amount of state
 - Expose as a much as possible through `props`
-- Have good defaults for everything
+- Have defaults that allow for progessive complexity; "opt-in" features
 
 - - -
 
-#### State
+### State
 
-- localized state is the main blocker for composability
-- State that can't be controlled by a parent must be managed in two places if you want different behavior
+localized state limits composability; it represents codified behavior
 
+State that can't be controlled by a parent must be duplicated which inverts data flow
+<!-- .element: class="fragment" -->
 
 ```js
+// we want to adjust the open behavior of the multiselect
 componentDidUpdate(prevProps, prevState){
   let select = this.refs.select;
-  // we also need to replicate that logic again in the parent 
-  // if we are lucky there is a method we can call on the ref, otherwise...
+  
+  // if we're lucky there is a api method on the ref, otherwise...
   if (this.state.parentSaysItsOpen && !prevState.parentSaysItsOpen)
     select.setState({ open: true }) // <-- blllaaah
 
   else if( !this.state.parentSaysItsOpen && prevState.parentSaysItsOpen)
     select.setState({ open: false })
 }
+
 render(){
   // multiselect internally managing its `open` state
   return <Multiselect refs='select' />
@@ -70,28 +73,28 @@ Alernatively State that isn't managed, requires the parent to do all the wiring
 
 __every__. __single__. __time__.
 
-```js
+```jsx
 render(){
   return (
     <Multiselect
       value={this.state.value}
       open={this.state.open} 
       searchTerm={this.state.currentFilter}
-      onChange={ value => this.setState({ value })}
-      onToggle={ open => this.setState({ open })}
-      onSearch={ currentFilter => this.setState({ currentFilter })}/>
+      onChange={value => this.setState({ value })}
+      onToggle={open => this.setState({ open })}
+      onSearch={currentFilter => this.setState({ currentFilter })}/>
   )
 }
 ```
 <!-- .element: class="" -->
 
-this is super terrible when you have 15 inputs in a form, especially since the parent will defer to the input for the state _most_ of the time
+This is terrible when you have 15 inputs in a form, especially since the parent will defer to the input for the state _most_ of the time
 
 - - - 
 
 ### Controlled/Uncontrolled inputs
 
-We solve this by taking a hint from how React handles inputs
+Taking a hint from React, on handling inputs
 
 ```js
   // I don't even have an initial value!
@@ -125,30 +128,37 @@ This logic adds complexity, but its a complexity that is _really_ easy to abstra
 
 2. Wrap the "base" in another component that defers to the parent if a prop is provided, otherwise manage it in state. <!-- .element: class="fragment" -->
 
-`jquense/uncontrollable`<!-- .element: class="fragment" -->
+vvv 
 
+<img src='slides/img/uncontrollable.png'/>
+`jquense/uncontrollable`
+
+Note:
+- The pattern is predictable: store value in state, change when the handler is called
+- you can checkout an implementation I refactored out at my github
 
 - - - 
 #### Props and Defaults
 
-We expose a lot of props, which is why good defaults are important. 
+Widgets expose a lot of props, which is why good defaults are important. 
 
 The simpliest use case should be the simplest to instantiate.
 
-```js
+```xml
 <DateTimePicker defaultValue={new Date}/>
+
 <DropdownList data={colors}/>
 ```
 
 And more complex functionality is opt-in via props
 
-```js
+```xml
   <DropdownList isRtl
     value={1223} 
     data={contacts}
     valueField='id' 
     textField='full name'
-    groupBy={ contact => contact.lastName }/>
+    groupBy={contact => contact.lastName}/>
 ```
 
 vvv 
@@ -158,9 +168,11 @@ Exposing a broad api via props gives a user freedom to redefine any defaults the
 ```js
 class MyDatePicker extends React.Component {
 
-  static defaultProps = {
+  static defaultProps = { 
+    
     format: 'MMM dd, yyyy', 
   }
+
   render(){
     return <DateTimePicker {...this.props}/>
   }

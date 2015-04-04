@@ -18,6 +18,7 @@
 		<link rel="stylesheet" href="css/theme/white.css" id="theme">
 		<link rel="stylesheet" href="lib/css/custom.css">
 		<!-- Code syntax highlighting -->
+		<
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
 		<!-- Printing and PDF exports -->
@@ -56,6 +57,9 @@
 							With a goal towards painless mapping of <b>Values</b>, <b>Arrays</b>, <b>Numbers</b> and 
 							<b>Dates</b> to user friendly inputs
 						</p>
+						<aside class='notes'>
+							hi
+						</aside>
 					</section>
 					<section>
 						<h2>Single Value Pickers</h2>
@@ -121,7 +125,7 @@
   &lt;DateTimePicker 
     format='MMM dd, yyyy HH:ss tt'
     defaultValue={this.state.value}/&gt;
-    
+
 </code></pre>
 							</div>
 							<div class='col-6'>
@@ -136,72 +140,27 @@
 
 				<section>
 					<section>
-						This strategy is flexible while also being maintainable
+						This strategy is flexible (and maintainable)
 						<div class='flex'>
-							<div class='inline-item'>
+							<div class='inline-item' style='flex: 1'>
 								<img src='slides/img/dropdown-list.png'/>
-								<pre><code class='js' data-trim>
-  &lt;DropdownList 
-    data={listOfPeople} 
-    value={listOfPeople[0]}/&gt;
-							</code></pre>
 							</div>
-							<div class='inline-item'>
+							<div class='inline-item' style='flex: 1'>
 								<img src='slides/img/dropdown-list-after.png'/>
-								<pre><code class='js' data-trim>
-  &lt;DropdownList 
-    data={listOfPeople} 
-    value={listOfPeople[0]}
-    itemComponent={GreenNameItem}
-    valueComponent={GreetingInput}
-    listComponent={GroupableList}/&gt;
-							</code></pre>
 							</div>
 						</div>
+<pre style='width: 70%'><code class='xml' data-trim>  
+&lt;DropdownList 
+  data={listOfPeople} 
+  value={listOfPeople[0]}
+  itemComponent={GreenNameItem}   // These are all 
+  valueComponent={GreetingInput}  // React Component Types
+  listComponent={GroupableList}   // 
+/&gt; 
+</code></pre>	
 					</section>
-					<section>
-					(we also try and provide short cuts for common things)
-								<pre><code class='js' data-trim>
-  &lt;DropdownList 
-    data={listOfPeople} 
-    value={listOfPeople[0]}
-    itemComponent={GreenNameItem}
-    valueComponent={GreetingInput}
-    listComponent={GroupableList}/&gt;
-							</code></pre>					
-						</section>
 				</section>
-
-				<section>
-					<h6>
-						Try to identify the minmal necessary state and where to locate it
-					</h6>
-
-					<div class='flex center'>
-						<div class='inline-item'>
-						<p>Try and identify how to split up a widget.</p>
-
-						<p>Which can usually be categorized in two main ways</p>
-						</div>
-						<div class='inline-item'>
-							<div class='flex col fragment' style='text-align:left;'>
-								<div class='inline-item'>
-									<h6>Reusable Sub-Components</h6>
-									<hr/>
-									<strong class='fragment'>List<br/></strong>
-									<strong class='fragment'>WidgetButton<br/></strong>
-									<strong class='fragment'>Popup<br/></strong>
-								</div>
-								<div class='inline-item'>
-									<h6>Repeatable Behavior</h6>
-									<hr/>
-									<strong class='fragment'>FilterListMixin<br/></strong>
-									<strong class='fragment'>RightToLeftMixin<br/></strong>
-									<strong class='fragment'>WidgetFocusMixin<br/></strong>
-								</div>
-							</div>
-						</div>
-					</div>
+				<section data-markdown="slides/three.md" data-separator="- - -" data-separator-vertical="vvv">
 				</section>
 			</div>
 		</div>
