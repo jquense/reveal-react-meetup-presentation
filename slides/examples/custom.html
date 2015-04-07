@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="../css/react-widgets.css" rel="stylesheet"/>
+    <meta charset="utf-8" />
+    <style type="text/css">
+      body {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #333;
+      }
+
+      .rw-widget:not(.rw-calendar) {
+        max-width: 250px;
+      }
+      .rw-widget + .rw-widget {
+        margin-top: 20px;
+      }
+
+    </style>
+</head>
+
+<body style='margin: 30px;'>
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/globalize/0.1.1/globalize.min.js"></script>
+<script src="../react-widgets.js"></script>
+<script>
+
+  var ce = React.createElement.bind(React);
+  var widgets = ReactWidgets;
+
+  var MinimalPicker = React.createClass({
+    getInitialState: function(){
+      return { open: false }
+    },
+    render: function(){
+      var next = { calendar: 'time', time: 'calendar'}
+      var focusing = false;
+
+      return ce(widgets.DateTimePicker, {
+        time: false, calendar: false,
+        open: this.state.open,
+        onClick: function(){
+          if (focusing) 
+            return (focusing = false)
+
+          var open = this.state.open ? next[this.state.open] : 'calendar'
+          this.setState({ open: open })
+        }.bind(this),
+        
+        onFocus: function(){
+          var open = this.state.open ? next[this.state.open] : 'calendar'
+          focusing = true
+          this.setState({ open: open })
+        }.bind(this),
+
+        onToggle: function(open){
+          this.setState({ open: open })
+        }.bind(this),
+
+        format: 'MMM dd, yyyy HH:ss tt',
+        defaultValue: new Date()
+      })
+    }
+  })
+
+  var app = ce('div', null,
+    ce(MinimalPicker)
+  )
+
+  React.render(app, document.body)
+
+</script>
+</html>

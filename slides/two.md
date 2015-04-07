@@ -1,12 +1,12 @@
-Each widget handles **complex** values as well
+Each widget handles complex values as well as primitives
 
 ```js
-  var model = {
-    id: 0,
-    name: 'Jason Quense'
-  }
+  var model;
 
-  listOfPeople.push(model)
+  listOfPeople.push(model = {
+    id: 2453,
+    name: 'Jason Quense'
+  })
 
   // set the whole model object as the value, 
   // and just tell it what property to display
@@ -18,7 +18,7 @@ Each widget handles **complex** values as well
   // or if you only have the id you can just use that
   <DropdownList 
     data={listOfPeople}
-    value={0}
+    value={2453}
     valueField='id'
     textField='name'/>
 
@@ -26,17 +26,34 @@ Each widget handles **complex** values as well
 - - -
 
 I wanted to make inputs that worked great by themselves or could be easily 
-used as primitives for more complicated components.
+used as building blocks for more complicated components.
 
 To that end they need to be __simple__ to use while also unopinionated and configurable so that they can be easily __composed__
 
+Note: 
+  - an Annoyance with other libraries is that if you want to really extend, or tweak a widget you end up needing to override a lot and reimplmenet a lot. its very fragile.
+  - When you want to adjust behavior you don't want to make a whole new thing :(.
+
 vvv
 
-To meet that goal I try to make sure that Widgets:<!-- .element: style="text-align: left;" -->
+To meet that goal I try to make sure that widgets:<!-- .element: style="text-align: left;" -->
 
 - Manage the smallest possible amount of state
 - Expose as a much as possible through `props`
 - Have defaults that allow for progessive complexity; "opt-in" features
+
+vvv
+
+I consider internationalization and accessibility part of "easy to use"
+
+- Provide a localization strategy out of the box via Globalize.js <!-- .element: class="fragment" -->
+- All functionality is accessible via keyboard navigation <!-- .element: class="fragment" -->
+- Components implement relevant ARIA attributes/roles <!-- .element: class="fragment" -->
+- Components work "right to left".<!-- .element: class="fragment" -->
+
+Note:
+ - keyboard nav is helpful for power users as well as users with disabilities
+ - localization is critical for other cultures, no one else wants to read american date formats
 
 - - -
 
@@ -44,7 +61,7 @@ To meet that goal I try to make sure that Widgets:<!-- .element: style="text-ali
 
 localized state limits composability; it represents codified behavior
 
-State that can't be controlled by a parent must be duplicated which inverts data flow
+State that can't be controlled by a parent must be duplicated or invert data flow
 <!-- .element: class="fragment" -->
 
 ```js
@@ -66,6 +83,9 @@ render(){
 }
 ```
 <!-- .element: class="fragment" -->
+
+Note:
+ - by behavior i mean that the pattern of storing state represents a behavior. Open when you click, close when you select. by deciding when and where to persist that state, you can adjust behavior.
 
 vvv
 
@@ -89,6 +109,9 @@ render(){
 <!-- .element: class="" -->
 
 This is terrible when you have 15 inputs in a form, especially since the parent will defer to the input for the state _most_ of the time
+
+Note:
+- this is an aspect of the React ecosystem i sometimes find frustrating; while explicitness is good, it is sometimes unnecessary and counter-productive.
 
 - - - 
 

@@ -54,11 +54,11 @@
 							A suite of typed or data "bound" form input components for React. For all your form and CRUD needs
 						</p>
 						<p>
-							With a goal towards painless mapping of <b>Values</b>, <b>Arrays</b>, <b>Numbers</b> and 
+							With a goal towards painless mapping of <b>Complex Values</b>, <b>Arrays</b>, <b>Numbers</b> and 
 							<b>Dates</b> to user friendly inputs
 						</p>
 						<aside class='notes'>
-							hi
+							heavily influenced by jquery ui and kendo ui
 						</aside>
 					</section>
 					<section>
@@ -67,7 +67,7 @@
 						<div class='row'>
 							<div class='col-6'>
 
-<pre><code class='js'>
+<pre><code class='xml'>
   &lt;DropdownList 
     data={list} 
     defaultValue={this.state.value}/&gt;
@@ -93,7 +93,7 @@
 						<div class='row'>
 							<div class='col-6'>
 
-<pre><code class='js'>
+<pre><code class='xml'>
   &lt;SelectList 
     multiple
     data={list} 
@@ -117,7 +117,7 @@
 						<div class='row'>
 							<div class='col-6'>
 
-<pre><code class='js'>
+<pre><code class='xml'>
   &lt;NumberPicker 
     format='C0' 
     defaultValue={this.state.value}/&gt;
@@ -160,6 +160,7 @@
 </code></pre>	
 					</section>
 				</section>
+				
 				<section data-markdown="slides/three.md" data-separator="- - -" data-separator-vertical="vvv">
 				</section>
 			</div>
@@ -172,11 +173,6 @@
 		<script src="slides/widget-intro.js"></script>
 
 		<script>
-
-			Reveal.addEventListener( 'fragmentshown', function( event ) {
-			  console.log(event.fragment)
-			});
-
 			// Full list of configuration options available at:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
