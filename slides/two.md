@@ -23,6 +23,10 @@ Each widget handles complex values as well as primitives
     textField='name'/>
 
 ```
+
+Note:
+  - this is helpful for easily binding some sort of model entity to an input with little fuss
+  
 - - -
 
 I wanted to make inputs that worked great by themselves or could be easily 
@@ -31,9 +35,10 @@ used as building blocks for more complicated components.
 To that end they need to be __simple__ to use while also unopinionated and configurable so that they can be easily __composed__
 
 Note: 
-  - an Annoyance with other libraries is that if you want to really extend, or tweak a widget you end up needing to override a lot and reimplmenet a lot. its very fragile.
-  - When you want to adjust behavior you don't want to make a whole new thing :(.
-
+  + an Annoyance with other libraries is that if you want to really extend, or tweak a widget you end up needing to override a lot and reimplmenet a lot. its very fragile.
+  + When you want to adjust behavior you don't want to make a whole new thing :(.
+  + Inputs are the sort of thing that you use all the time (in a CRUD app anyway), they can't be a pain to wire up, and I also need to be able to build stuff with them
+s
 vvv
 
 To meet that goal I try to make sure that widgets:<!-- .element: style="text-align: left;" -->
@@ -42,9 +47,12 @@ To meet that goal I try to make sure that widgets:<!-- .element: style="text-ali
 - Expose as a much as possible through `props`
 - Have defaults that allow for progessive complexity; "opt-in" features
 
+Note:
+ - Side comment: inputs are not "submittable" in the traditional way. I am not please about "breaking" the form in this way but the alternative means i need to sync/store state in the DOM which is really bad for complex inputs.
+
 vvv
 
-I consider internationalization and accessibility part of "easy to use"
+Internationalization and accessibility part of "simple to use"
 
 - Provide a localization strategy out of the box via Globalize.js <!-- .element: class="fragment" -->
 - All functionality is accessible via keyboard navigation <!-- .element: class="fragment" -->

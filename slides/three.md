@@ -1,3 +1,8 @@
+Generally I try to make use of the public API to add features.
+
+e.g grouped dropdowns could have been implemented externally
+
+- - - 
 ### Challenges
 
 - Tracking React versions accross breaking changes

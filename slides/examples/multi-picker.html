@@ -32,21 +32,33 @@
 
   var ce = React.createElement.bind(React);
   var widgets = ReactWidgets;
+  
 
-  var app = ce('div', null,
-    ce(widgets.SelectList, {
-      data: ['Yolanda', 'Jane', 'John', 'Jose', 'Zane'],
-      defaultValue: ['Jane', 'John'],
-      multiple: true
-    }),
-    ce(widgets.Multiselect, {
-      data: ['orange', 'red', 'blue', 'mauve', 'violet'],
-      defaultOpen: true,
-      defaultValue: ['orange', 'blue']
-    })
-  )
+  function render(data, value) {
+    var app = ce('div', null,
+      ce(widgets.SelectList, {
+        data: ['Yolanda', 'Jane', 'John', 'Jose', 'Zane'],
+        defaultValue: ['Jane', 'John'],
+        multiple: true
+      }),
+      ce(widgets.Multiselect, {
+        data: data,
+        defaultOpen: true,
+        value: value,
+        onChange: function(val){
+          render(data, val)
+        },
+        onCreate: function(v){
+          render(data, value.concat(v))
+        }
+      })
+    )
 
-  React.render(app, document.body)
+    React.render(app, document.body)
+  }
+
+  render(['orange', 'red', 'blue', 'mauve', 'violet'], ['orange', 'blue'])
+  
 
 </script>
 </html>

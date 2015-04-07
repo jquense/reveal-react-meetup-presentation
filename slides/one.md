@@ -20,3 +20,6 @@ My team builds software to help support field work and to capture data about the
 <br/>
 I also build a react components <!-- .element: class="fragment" -->
 
+Note:
+ - My team is support for Lwyers, investigators and social workers
+ - we collect a lot of data, which translates to a lot of crud apps
